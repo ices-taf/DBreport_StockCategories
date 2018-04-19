@@ -1,0 +1,45 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+  html_document:
+    mathjax: null
+    theme: null
+    highlight: null
+---
+
+```{r setup, include=FALSE}
+library(icesTAF)
+library(htmltools)
+library(dplyr)
+library(DT)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<br>
+<br>
+<!--
+[<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
+-->
+
+_Last updated on `r format(Sys.time(), format = "%d %B %Y at %H:%M:%S")`._
+
+## Stock Categories
+
+```{r read_data}
+cats <- read.taf("report/StockCategories.csv")
+```
+
+```{r table}
+  caption <- ""
+  datatable(cats,
+            escape = FALSE,
+            caption = tags$caption(style = "caption-side: bottom; text-align: center;", em(caption)),
+            rownames = FALSE,
+            options = list(pageLength = 100,
+                           autoWidth = TRUE,
+                           dom = "ftp"),
+            elementId = "stock-table"
+            )
+```
